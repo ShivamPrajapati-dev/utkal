@@ -1,0 +1,37 @@
+{
+  "name": "sih",
+  "version": "1.0.0",
+  "description": "Our main landing page is this https://abhishek-amrute.github.io/SIH/. ignore the current code.....",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon express.js && casperjs core.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShivamPrajapati-dev/SIH.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShivamPrajapati-dev/SIH/issues"
+  },
+  "homepage": "https://github.com/ShivamPrajapati-dev/SIH#readme",
+  "dependencies": {
+    "base64-img": "^1.0.4",
+    "body-parser": "^1.19.0",
+    "buffer": "^4.0.0",
+    "casperjs": "^1.1.4",
+    "connect-timeout": "^1.9.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "firebase": "^7.6.2",
+    "image-to-base64": "^2.0.1",
+    "nodemon": "^2.0.2",
+    "phantomjs-prebuilt": "^2.1.16",
+    "twilio": "^3.39.3"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}
