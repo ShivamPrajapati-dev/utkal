@@ -1,0 +1,227 @@
+<html>
+
+<head>
+    <title>
+        FIR
+    </title>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <style>
+        .parallax {
+            height: 500px;
+            background-image: url(" https://www.tbase.com/wp-content/uploads/tbase-legal-imperative.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        
+        .parallax1 {
+            background-image: url("https://ak6.picdn.net/shutterstock/videos/8399296/thumb/8.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            height: 450px;
+        }
+        
+        #parallax4 {
+            background-size: cover;
+            background-attachment: fixed;
+            height: 0%;
+        }
+        
+        .ImgBox {
+            position: absolute;
+            top: 35%;
+            left: 60%;
+            transform: scale(-50%, -50%);
+        }
+        
+        input {
+            height: 60px;
+            width: 250px;
+            left: 41%;
+            border: 2px solid grey;
+            border-radius: 20px;
+            position: absolute;
+            top: 900px;
+            font-style: italic;
+            font-weight: bolder;
+        }
+        
+        .topic {
+            position: absolute;
+            color: rgba(233, 210, 210, 0.863);
+            top: 100%;
+            left: 2%;
+            font-style: oblique;
+            font-weight: bold;
+        }
+        
+        image:hover {
+            cursor: pointer;
+        }
+        
+        h2 {
+            position: absolute;
+            color: red;
+        }
+        
+        h3 {
+            font-family: Palatino, URW Palladio L, serif;
+            font: italic 1.2em "Fira Sans", serif;
+            font-stretch: expanded;
+            font-weight: bolder;
+            font-size: 100px;
+        }
+        
+        h1 {
+            padding: 30px;
+        }
+        
+        #player {
+            position: absolute;
+            width: 1000px;
+            height: 600px;
+            left: 3%;
+            top: 25%;
+        }
+        
+        #buttn {
+            position: absolute;
+            top: 30%;
+        }
+        
+        #player1 {
+            position: absolute;
+            top: 91%;
+            left: 52%;
+        }
+        
+        #player3 {
+            position: absolute;
+            left: 50%;
+            top: 5%;
+        }
+        
+        #imgh {
+            position: absolute;
+            width: 700px;
+            display: flex;
+            top: 135%;
+            border: 6px solid black;
+            border-radius: 10px;
+            right: 5%;
+        }
+        
+        .container {
+            background-color: lightblue;
+        }
+        
+        #dwn {
+            background-image: url("https://wallpapercave.com/wp/0YsfzTq.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parallax4" class="nav-content-wrapper">
+        <nav class="navbar navbar-light" style="background-color: transparent;">
+            <img style="background-color: transparent;width:120px;" src="data:image/png;base64,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">
+            <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_wEt2nn.json" background="transparent" speed="1" style="width: 150px; height: 100px;" loop autoplay>
+            </lottie-player>
+            <h1 style="color:blue; font-family:  sans-serif; font-style: italic; font-weight: bolder;">CCTNS
+                <small style="color:red; font-weight: bolder;">Crime & Criminal Tracking Network & System</small></h1>
+            <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_wEt2nn.json" background="transparent" speed="1" style="width: 150px; height: 100px;" loop autoplay>
+            </lottie-player>
+            <a href="Login Form.html"> <i id="h" style="font-size:80px; color:black;" class="fa fa-user icon" onmouseover="document.getElementById('h').innerHTML('login')">
+            </i><strong><small style="color:black;">LOGIN</small></strong></a>
+
+
+
+        </nav>
+    </div>
+    <center> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable" id="buttn">
+        Launch demo modal
+      </button></center>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    Designing a Virtual Police Station in which animated police officer would be used to interact with victim/victims to capture all the details with respect to identity of complainant, details of the incidence or crime committed will extract supplementary
+                    information to capture ingredient of the crimes committed, identity of criminals and likely witnesses the same would be converted in text format as an FIR which would be signed by the complaint/ victim through OCR device and verified
+                    through digital signature (using OTP based verification of Aadhar). The signed FIR would be routed to CCTNS system using Citizen Portal Bridge already available. Allowing OCR and Digital Signature of SHO to convert it in formal/ legally
+                    acceptable FIR.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"> </div>
+    <div class="container">
+        <lottie-player id="player" src="https://assets10.lottiefiles.com/packages/lf20_mboj5x.json" background="transparent" speed="1" loop autoplay>
+        </lottie-player>
+
+        <div class="ImgBox">
+            <h3>SMART</h3>
+            <h3> INDIA</h3>
+            <h3>HACKTHON 2020</h3>
+            <lottie-player id="player3" src="https://assets2.lottiefiles.com/datafiles/aidRldsQ1TyvNEf/data.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay>
+            </lottie-player>
+        </div>
+    </div>
+    <div class="parallax"> </div>
+
+    <div class="parallax1"></div>
+    <a href="#">
+        <center></center>
+            <lottie-player id="player1" src="https://assets1.lottiefiles.com/datafiles/q8XNnSXjn7JscK4/data.json" background="transparent" background="rgba(0, 0, 0, 0.38)" speed="1" style="width: 200px; height: 150px;" loop autoplay>
+            </lottie-player>
+            <input type="submit" value="START FIR" name="strt" id="strt" style=" background-color:red; "></center>
+    </a>
+
+
+
+    <h1 class="topic ">
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+
+        <em>Developing Virtual Police Station</br> to receive FIR with OCR based digital </br>signature authenticated through digital signature </br>(Aadhar Number based authentication).</em></h1>
+
+    <img id="imgh" src="https://psmag.com/.image/t_share/MTYzOTY4MjM5NTM2MTg3MTA1/gettyimages-589931494-594x594.jpg">
+
+    <div class="parallax1"></div>
+    <div id="dwn">
+        <div class="container">
+            <div class="jumbotron" style="padding:4px;">
+                <h1 class="display-4 ">About us</h1>
+                <p class="lead ">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <hr class="my-8 ">
+                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <a class="btn btn-primary btn-lg " href="# " role="button ">Learn more</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
