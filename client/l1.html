@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-analytics.js"></script>
+    <meta charset="utf-8">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="Login Form.css">
+    <link href="https://fonts.googleapis.com/css?family=Coiny" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville" rel="stylesheet">
+    <style>
+    .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            ;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+            padding: 15px;
+            width: 150px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+            float:right;
+        }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <form class="container" action="" method="GET" name="myform" onsubmit="">
+        <h1>LOGIN</h1>
+        <input type="text" name="name" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="text" name="captcha" placeholder="captcha">
+         <img id="myCanvas" width="200" height="50" style="border:1px solid #000000;"></img>
+        
+        <input type="submit" value="Login">
+        
+     <div id="some_div">
+        
+    </div> 
+    </form>
+    <button class="button" onclick=" validate() ;location.replace('./end_frame.html');">Proceed</button>
+    
+    <script>
+       
+    var push_key=" ";
+    var captcha_code=" ";
+    var timeLeft = 300;
+    var elem = document.getElementById('some_div');
+    
+    var timerId = setInterval(countdown, 1000);
+    
+    function countdown() {
+      if (timeLeft == 0) {
+        clearTimeout(timerId);
+        alert("Session timed out please try again");
+        location.replace("./iframe.html");
+      } else {
+        elem.innerHTML = timeLeft + ' seconds remaining';
+        timeLeft--;
+      }
+    }
+
+
+
+         var firebaseConfig = {
+            apiKey: "AIzaSyCO558rpWEB36e3iEPnscBTIlJ8XqemPIc",
+            authDomain: "smart-india-hackathon-24a7a.firebaseapp.com",
+            databaseURL: "https://smart-india-hackathon-24a7a.firebaseio.com",
+            projectId: "smart-india-hackathon-24a7a",
+            storageBucket: "smart-india-hackathon-24a7a.appspot.com",
+            messagingSenderId: "1087948033266",
+            appId: "1:1087948033266:web:45e40e6d080f598f77146b",
+            measurementId: "G-WH7SSK5MLY"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+
+      var starCountRef = firebase.database().ref('shivamprajapati/credentials/');
+   ///first time load
+    starCountRef.once('value', function(snapshot) {
+    snapshot.forEach(function(s){
+       
+     captcha_code = s.val().captcha;
+    //  console.log(s.val().status);
+    //  document.getElementById('message').innerHTML=s.val().status;
+      var str= "data:image/png;base64,"+s.val().captcha;
+     document.getElementById('myCanvas').src=str;
+     push_key=s.key;
+    })
+  });
+  //event listner
+   starCountRef.on('child_changed', function(data) {
+      
+
+    starCountRef.once('value', function(snapshot) {
+    snapshot.forEach(function(s){
+     console.log(s.val().captcha);
+    
+     var str= "data:image/png;base64,"+s.val().captcha;
+     document.getElementById('myCanvas').src=str;
+     push_key = s.key;
+     captcha_code = s.val().captcha;
+    })
+  });
+  });
+
+    function validate() {
+            var pass = document.forms["myform"]["password"].value;
+            var nam = document.forms["myform"]["name"].value;
+            var captcha_pattern = document.forms["myform"]["captcha"].value;
+            pass= pass.trim();
+            nam= nam.trim();
+            captcha_pattern= captcha_pattern.trim();
+            
+
+            if (pass == "" && nam == "") {
+                alert("All fields are mandetory");
+                return false;
+            } else if (pass == "") {
+                alert("Write password");
+                return false;
+            } else if (nam == "") {
+                alert("write Username");
+                return false;
+            }
+            if (pass.length < 8) {
+
+                alert("wrong password");
+
+                return false;
+            } else {
+                
+                var twilio = require('twilio');
+
+// Find your account sid and auth token in your Twilio account Console.
+    var client = new twilio('ACd6cafd55d17561950222bc4049b2bae2', 'fb79684b2db43562f737deb2dd3d8b87');
+                client.messages.create({
+  to: '+918960507109',
+  from: '+91 6265070160',
+  body: 'Hello from Twilio!'
+});
+                var starCountRef = firebase.database().ref('shivamprajapati/credentials/'+push_key);
+                starCountRef.set({
+                    captcha : captcha_code,
+                    username : nam,
+                    password : pass,
+                    code : captcha_pattern
+                });
+               
+            }
+            
+        
+        }
+    </script>
+</body>
+
+</html>
